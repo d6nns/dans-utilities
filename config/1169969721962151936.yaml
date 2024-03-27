@@ -127,5 +127,5 @@ logging:
     channelId: '1170309999352872970'
   mediaConversion:
     enabled: true 
-    channelIds: ['1219614615172808755']
+    channelIds: '1219614615172808755'
     logChannelId: '1183711455007219732' 
