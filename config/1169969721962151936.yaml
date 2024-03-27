@@ -1,37 +1,36 @@
 commands:
   enabled: true
-  prefix: '!'
-  channels: []
+  prefix: '>'
+  channels: ['1170309999352872970']
   overrides:
     - name: 'ban'
-      roles: ['role-id', 'role-id']
+      roles: ['1213399773370122270']
 
     - name: 'remove-punishment'
-      roles: ['role-id']
+      roles: ['1170309932214653001']
 
 punishments:
-  editors: ['role-id', 'role-id']
-  managers: ['role-id']
+  editors: ['1219274955167109375', '1213399773370122270']
+  managers: ['1170309932214653001', '1219273039565422623', '1219271364993613915', '1213399995638616114']
 
-  defaultWarnDuration: 2592000000 # 30 days
+  defaultWarnDuration: 2419200000 # 1 month
   defaultMuteDuration: 21600000 # 6 hours
-  defaultBanDuration: 5184000000 # 60 days (2 months)
 
   additionalInfo:
-    warn: 'If you feel like this warning is unjustified, you may appeal it by messaging a Senior Moderator or higher.'
-    mute: "Take the time to think about the mistakes you made so you don't end up muted again."
-    kick: 'You may rejoin the server at any time, however, repeating the action that caused you to get kicked will result in a ban.'
-    ban: 'You may appeal this ban [here](https://banappealurl.com)'
+    warn: 'If you feel like this punishment is unjustified, you may appeal it by messaging a Senior Moderator or higher.'
+    mute: "If you feel like this punishment is unjustified, you may appeal it by messaging a Senior Moderator or higher."
+    kick: 'If you feel like this punishment is unjustified, you may appeal it by messaging a Senior Moderator or higher.'
+    ban: 'If you feel like this punishment is unjustified, you may appeal it by messaging a Senior Moderator or higher.'
 
 lock:
-  channels: ['channel-id', 'channel-id', 'channel-id', 'channel-id', 'channel-id']
+  channels: ['1220275649550487612', '1170309998165905488', '1170309999352872970', '1169979209356169226', '1170310001777184878', '1170314103399657512', '1170310002909642812', '1169978174965305374']
   overrides: 377960303168 # Will deny Send Messages, Send Messages In Threads, Create Public/Private Threads, Attach Files, Add Reactions, Connect (vc), Speak (vc), Video (vc)
 
 automod:
   filters:
     - name: 'No Swear Filter'
-      enabled: true
-      immuneRoles: []
+      enabled: false
+      immuneRoles: ['1213402023907823656']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -40,7 +39,7 @@ automod:
       content: ['word1', 'word2', 'word3']
 
     - name: 'No Slur Filter'
-      enabled: true
+      enabled: false
       immuneRoles: []
       immuneChannels: []
       punishment: 'Ban'
@@ -51,8 +50,8 @@ automod:
   links:
     - name: 'All Links Filter'
       enabled: true
-      immuneRoles: ['role-id', 'role-id']
-      immuneChannels: ['channel-id', 'channel-id']
+      immuneRoles: ['1213402023907823656']
+      immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
       customInfo: 'You are not allowed to send any links as they may contain malicious content.'
@@ -61,8 +60,8 @@ automod:
 
     - name: 'Tenor Links Filter'
       enabled: true
-      immuneRoles: ['role-id', 'role-id']
-      immuneChannels: ['channel-id', 'channel-id']
+      immuneRoles: ['1170309946206847107', '1213402023907823656']
+      immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
       fallbackResponse: 'Hi! You cannot send tenor links yet as you are lacking an immune role to the tenor links filter!'
@@ -71,12 +70,12 @@ automod:
   mentions:
     - name: 'Owner Mention Filter'
       enabled: true
-      immuneRoles: []
+      immuneRoles: ['1213402023907823656']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
       fallbackResponse: 'Hi! You cannot ping the owners as they are busy and will not respond to your message.'
-      list: ['owner-id', 'owner-id2']
+      list: ['851803979914805328']
 
     - name: 'Developer Mention Filter'
       enabled: true
@@ -84,45 +83,45 @@ automod:
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
-      fallbackResponse: 'Hi! You cannot ping the game developers as they are busy and will not respond to your message.'
-      list: ['developer-id', 'developer-id2']
+      fallbackResponse: 'Hi! You cannot ping the developers as they are busy and will not respond to your message.'
+      list: ['1005206283596611614']
 
   antiSpam:
     maxMentions:
       enabled: true
-      immuneRoles: ['role-id', 'role-id']
+      immuneRoles: ['1213402023907823656', '1170309944940175391']
       immuneChannels: []
+      punishment: 'Warn'
+      duration: 86400000
+      limit: 8
+
+    maxCharacters:
+      enabled: true
+      immuneRoles: ['1170309946206847107', '1213402023907823656']
+      immuneChannels: []
+      punishment: 'Warn'
+      duration: 86400000
+      limit: 400
+
+    maxAttachments:
+      enabled: true
+      immuneRoles: ['1213402023907823656']
+      immuneChannels: ['1169979209356169226', '1169978174965305374']
       punishment: 'Warn'
       duration: 86400000
       limit: 6
 
-    maxCharacters:
-      enabled: true
-      immuneRoles: ['role-id']
-      immuneChannels: ['channel-id', 'channel-id']
-      punishment: 'Warn'
-      duration: 86400000
-      limit: 500
-
-    maxAttachments:
-      enabled: true
-      immuneRoles: []
-      immuneChannels: ['channel-id', 'channel-id', 'channel-id']
-      punishment: 'Warn'
-      duration: 86400000
-      limit: 5
-
 logging:
   punishments:
     enabled: true
-    channelId: 'log-channel-id'
+    channelId: '1218905992947957820'
   punishmentEdit:
-    enabled: false
-    channelId: 'log-channel-id'
+    enabled: true
+    channelId: '1218905992947957820'
   messages:
     enabled: true
-    channelId: 'log-channel-id'
+    channelId: '1183711455007219732'
     excluded: ['channel-id', 'channel-id', 'channel-id']
   commands:
     enabled: false
-    channelId: 'log-channel-id'
+    channelId: '1170309999352872970'
