@@ -50,7 +50,7 @@ automod:
   links:
     - name: 'All Links Filter'
       enabled: true
-      immuneRoles: ['1213402023907823656']
+      immuneRoles: ['1170309932214653001']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -60,7 +60,7 @@ automod:
 
     - name: 'Tenor Links Filter'
       enabled: true
-      immuneRoles: ['1170309946206847107', '1213402023907823656']
+      immuneRoles: ['1170309932214653001', '1170309946206847107']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -70,7 +70,7 @@ automod:
   mentions:
     - name: 'Owner Mention Filter'
       enabled: true
-      immuneRoles: ['1213402023907823656']
+      immuneRoles: ['1170309932214653001']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -89,7 +89,7 @@ automod:
   antiSpam:
     maxMentions:
       enabled: true
-      immuneRoles: ['1213402023907823656', '1170309944940175391']
+      immuneRoles: ['1170309932214653001']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -97,7 +97,7 @@ automod:
 
     maxCharacters:
       enabled: true
-      immuneRoles: ['1170309946206847107', '1213402023907823656']
+      immuneRoles: ['1170309932214653001', '1170309944940175391']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -105,7 +105,7 @@ automod:
 
     maxAttachments:
       enabled: true
-      immuneRoles: ['1213402023907823656']
+      immuneRoles: ['1170309932214653001']
       immuneChannels: ['1169979209356169226', '1169978174965305374']
       punishment: 'Warn'
       duration: 86400000
