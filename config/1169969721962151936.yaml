@@ -4,14 +4,14 @@ commands:
   channels: ['1170309999352872970']
   overrides:
     - name: 'ban'
-      roles: ['1213399773370122270']
-
-    - name: 'remove-punishment'
       roles: ['1170309932214653001']
 
+    - name: 'remove-punishment'
+      roles: ['1219273039565422623']
+
 punishments:
-  editors: ['1219274955167109375', '1213402023907823656', '1213399773370122270']
-  managers: ['1170309932214653001', '1219273039565422623', '1219271364993613915', '1213399995638616114']
+  editors: '1170309932214653001'
+  managers: ['1219273039565422623', '1213399995638616114']
 
   defaultWarnDuration: 2592000000 # 1 month
   defaultMuteDuration: 21600000 # 6 hours
