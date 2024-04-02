@@ -11,7 +11,7 @@ commands:
 
 punishments:
   editors: '1170309932214653001'
-  managers: ['1219273039565422623', '1213399995638616114']
+  managers: ['1213399995638616114', '1219273039565422623']
 
   defaultWarnDuration: 2592000000 # 1 month
   defaultMuteDuration: 21600000 # 6 hours
@@ -30,7 +30,7 @@ automod:
   filters:
     - name: 'No Swear Filter'
       enabled: false
-      immuneRoles: ['1213402023907823656']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -40,7 +40,7 @@ automod:
 
     - name: 'No Slur Filter'
       enabled: false
-      immuneRoles: []
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Ban'
       customInfo: 'We are a welcoming and inclusive community, as such we will not tolerate any slurs.'
@@ -50,7 +50,7 @@ automod:
   links:
     - name: 'All Links Filter'
       enabled: true
-      immuneRoles: ['1170309932214653001']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -60,7 +60,7 @@ automod:
 
     - name: 'Tenor Links Filter'
       enabled: true
-      immuneRoles: ['1170309932214653001', '1170309946206847107']
+      immuneRoles: ['1170309946206847107', '1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -70,7 +70,7 @@ automod:
   mentions:
     - name: 'Owner Mention Filter'
       enabled: true
-      immuneRoles: ['1170309932214653001']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -79,7 +79,7 @@ automod:
 
     - name: 'Developer Mention Filter'
       enabled: true
-      immuneRoles: []
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -89,7 +89,7 @@ automod:
   antiSpam:
     maxMentions:
       enabled: true
-      immuneRoles: ['1170309932214653001']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -97,7 +97,7 @@ automod:
 
     maxCharacters:
       enabled: true
-      immuneRoles: ['1170309932214653001', '1170309944940175391']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: []
       punishment: 'Warn'
       duration: 86400000
@@ -105,7 +105,7 @@ automod:
 
     maxAttachments:
       enabled: true
-      immuneRoles: ['1170309932214653001']
+      immuneRoles: ['1170309932214653001', '1219273039565422623', '1213399995638616114']
       immuneChannels: ['1169979209356169226', '1169978174965305374']
       punishment: 'Warn'
       duration: 86400000
