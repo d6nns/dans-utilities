@@ -1,10 +1,11 @@
 import { Guild, GuildMember, Message, PermissionFlagsBits } from 'discord.js';
-import { containsProhibitedWords, genID, quickMessage, readConfig } from '../lib/util/functions';
+import { containsProhibitedWords, genID, quickMessage } from '../lib/util/functions';
 import { PunishmentType } from '../lib/util/constants';
 import client from '../client';
 import { Escalation } from '../types';
 import ms from 'ms';
 import * as numberToWords from 'number-to-words';
+import Config from '../lib/util/config';
 
 export default async function (message: Message<true>) {
   if (
@@ -15,10 +16,10 @@ export default async function (message: Message<true>) {
   )
     return;
 
-  const config = await readConfig(message.guildId);
+  const config = Config.get(message.guildId);
   if (!config) return;
 
-  const automod = config.automod;
+  const automod = config.data.automod;
 
   for (const filter of automod?.filters || []) {
     if (

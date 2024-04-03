@@ -1,7 +1,8 @@
 import { Collection, Colors, EmbedBuilder, Message, PartialMessage } from 'discord.js';
 import Listener from '../lib/structs/Listener';
-import { bin, readConfig } from '../lib/util/functions';
+import { bin } from '../lib/util/functions';
 import { mainColor } from '../lib/util/constants';
+import Config from '../lib/util/config';
 
 class MessageDeleteBulkListener extends Listener {
   constructor() {
@@ -13,17 +14,17 @@ class MessageDeleteBulkListener extends Listener {
 
     messages = messages.filter(msg => msg.author !== null);
 
-    const config = await readConfig(refMsg.guildId);
+    const config = Config.get(refMsg.guildId);
     if (!config) return;
 
     if (
-      !config.logging?.messages ||
-      !config.logging.messages.enabled ||
-      config.logging.messages.excluded?.includes(refMsg.channelId || refMsg.channel.parentId!)
+      !config.data.logging?.messages ||
+      !config.data.logging.messages.enabled ||
+      config.data.logging.messages.excluded?.includes(refMsg.channelId || refMsg.channel.parentId!)
     )
       return false;
 
-    const channel = await this.client.channels.fetch(config.logging.messages.channelId).catch(() => null);
+    const channel = await this.client.channels.fetch(config.data.logging.messages.channelId).catch(() => null);
     if (!channel || !channel.isTextBased()) return false;
 
     const embed = new EmbedBuilder()

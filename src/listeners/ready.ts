@@ -1,6 +1,6 @@
 import { ActivityType } from 'discord.js';
 import Listener from '../lib/structs/Listener';
-import { confirmCommands } from '../lib/util/functions';
+import { confirmCommands, confirmConfig, readConfig } from '../lib/util/functions';
 
 class ReadyListener extends Listener {
   constructor() {
@@ -39,6 +39,12 @@ class ReadyListener extends Listener {
     }, 15000);
 
     for (const guild of this.client.guilds.cache.values()) {
+      const file = await confirmConfig(guild.id);
+      if (!file)
+        return guild.leave().then(() => {
+          console.log(`[Config] Left guild ${guild.id} due to missing config file.`);
+        });
+      await readConfig(guild.id);
       await confirmCommands(guild);
     }
   }

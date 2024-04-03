@@ -1,7 +1,8 @@
-import { Colors, EmbedBuilder, Message } from 'discord.js';
-import { bin, readConfig } from '../lib/util/functions';
+import { EmbedBuilder, Message } from 'discord.js';
+import { bin } from '../lib/util/functions';
 import client from '../client';
 import { mainColor } from '../lib/util/constants';
+import Config from '../lib/util/config';
 
 export default async function (oldMessage: Message<true> | null, message: Message<true>) {
   if (!message.author) return;
@@ -10,17 +11,17 @@ export default async function (oldMessage: Message<true> | null, message: Messag
 
   if (oldMessage && oldMessage.content === message.content) return;
 
-  const config = await readConfig(message.guildId);
+  const config = Config.get(message.guildId);
   if (!config) return;
 
   if (
-    !config.logging?.messages ||
-    !config.logging.messages.enabled ||
-    config.logging.messages.excluded?.includes(message.channelId || message.channel.parentId!)
+    !config.data.logging?.messages ||
+    !config.data.logging.messages.enabled ||
+    config.data.logging.messages.excluded?.includes(message.channelId || message.channel.parentId!)
   )
     return false;
 
-  const channel = await client.channels.fetch(config.logging.messages.channelId).catch(() => null);
+  const channel = await client.channels.fetch(config.data.logging.messages.channelId).catch(() => null);
   if (!channel || !channel.isTextBased()) return false;
 
   const embed = new EmbedBuilder()

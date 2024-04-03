@@ -1,19 +1,20 @@
 import { Message, PermissionFlagsBits } from 'discord.js';
 import { confirmGuild, unresolvedGuilds } from './chatInputCommand';
-import { readConfig, throwError } from '../lib/util/functions';
+import { throwError } from '../lib/util/functions';
 import client from '../client';
 import customMessageCommand from './customMessageCommand';
 import commandLog from './commandLog';
 import { safeCommands } from '../lib/util/constants';
+import Config from '../lib/util/config';
 
 export default async function (message: Message) {
   if (message.author.bot || !message.content || !message.inGuild()) return;
 
   const guild = await confirmGuild(message.guildId);
-  const config = await readConfig(message.guildId).catch(() => {});
-  if (!config || !config.commands.prefix || !config.commands.enabled) return;
+  const config = Config.get(message.guildId);
+  if (!config || !config.data.commands.prefix || !config.data.commands.enabled) return;
 
-  let prefix = config.commands.prefix;
+  let prefix = config.data.commands.prefix;
 
   if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).split(' ');
@@ -25,7 +26,7 @@ export default async function (message: Message) {
 
   if (!command) {
     try {
-      await customMessageCommand(message, args, commandName, config);
+      await customMessageCommand(message, args, commandName, config.data);
     } catch (e) {
       if (typeof e !== 'string') {
         console.error(e);
@@ -52,7 +53,7 @@ export default async function (message: Message) {
 
   if (command.userPermissions) {
     if (!message.member!.permissions.has(command.userPermissions)) {
-      const override = config.commands.overrides?.find(override => override.name === commandName);
+      const override = config.data.commands.overrides?.find(override => override.name === commandName);
       if (!message.member!.roles.cache.some(role => override?.roles.includes(role.id))) {
         return message.delete().catch(() => {});
       }
@@ -61,14 +62,14 @@ export default async function (message: Message) {
 
   if (command.commandChannel) {
     if (
-      !config.commands.channels?.includes(message.channelId) &&
+      !config.data.commands.channels?.includes(message.channelId) &&
       !message.member!.permissions.has(PermissionFlagsBits.ManageMessages)
     ) {
       return message
         .reply(
           `Whoops! You can only use commands in the following channel${
-            config.commands.channels?.length! > 1 ? 's' : ''
-          }: ${config.commands.channels?.map(channel => `<#${channel}>`).join(', ')}.`
+            config.data.commands.channels?.length! > 1 ? 's' : ''
+          }: ${config.data.commands.channels?.map(channel => `<#${channel}>`).join(', ')}.`
         )
         .then(msg => {
           setTimeout(() => {
@@ -90,7 +91,7 @@ export default async function (message: Message) {
   }
 
   try {
-    await command.run(message, args, config);
+    await command.run(message, args, config.data);
     if (command.guildResolve) unresolvedGuilds.delete(`${message.guildId!} ${commandName}`);
     if (!safeCommands.includes(commandName)) commandLog(message, commandName);
   } catch (e) {

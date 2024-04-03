@@ -1,10 +1,8 @@
 import {
   type Guild,
   type GuildMember,
-  ApplicationCommandPermissionType,
   Collection,
   ApplicationCommandPermissions,
-  PermissionFlagsBits,
   Message,
   Colors,
   SnowflakeUtil,
@@ -17,6 +15,7 @@ import { ConfigData } from '../structs/Interfaces';
 import * as yaml from 'js-yaml';
 import * as path from 'path';
 import fs from 'fs';
+import Config from './config';
 export const commandsPermissionCache = new Map<string, Collection<string, readonly ApplicationCommandPermissions[]>>();
 
 export function adequateHierarchy(member1: GuildMember, member2: GuildMember) {
@@ -119,12 +118,20 @@ export function genID(): string {
 }
 
 export async function readConfig(guildId: string): Promise<ConfigData | null> {
+  const configFile = await confirmConfig(guildId);
+  if (!configFile) return null;
   const configFilePath = getConfigFilePath(guildId);
 
   try {
     const fileContents = await fs.promises.readFile(configFilePath, 'utf8');
-    const config = yaml.load(fileContents) as ConfigData;
-    return config;
+    const data: ConfigData = (yaml.load(fileContents) as ConfigData) ?? {
+      commands: {
+        prefix: '!',
+        enabled: true
+      }
+    };
+    const config = Config.create(guildId, data);
+    return data;
   } catch (error) {
     console.error(`[Config] Error reading config file for guild ${guildId}: ${error}`);
     return null;
@@ -144,10 +151,7 @@ export async function confirmConfig(guildId: string) {
   } catch (error: any) {
     if (error.code === 'ENOENT') {
       console.log(`[Config] Config file for guild ${guildId} does not exist.`);
-    } else {
-      console.error(`[Config] Error reading config file for guild ${guildId}: ${error}`);
     }
-
     return null;
   }
 }

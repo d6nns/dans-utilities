@@ -1,17 +1,18 @@
 import { Message, hideLinkEmbed } from 'discord.js';
-import { readConfig } from '../lib/util/functions';
 import client from '../client';
+import Config from '../lib/util/config';
 
 export default async function (message: Message<true>) {
-  const config = await readConfig(message.guildId);
-  if (!config || !config.logging?.mediaConversion?.enabled || !config.logging?.mediaConversion?.logChannelId) return;
+  const config = Config.get(message.guildId);
+  if (!config || !config.data.logging?.mediaConversion?.enabled || !config.data.logging?.mediaConversion?.logChannelId)
+    return;
 
   if (
     message.attachments.size > 0 &&
     message.content.length === 0 &&
-    config.logging.mediaConversion.channelIds.includes(message.channelId)
+    config.data.logging.mediaConversion.channelIds.includes(message.channelId)
   ) {
-    const logChannel = await client.channels.fetch(config.logging.mediaConversion.logChannelId);
+    const logChannel = await client.channels.fetch(config.data.logging.mediaConversion.logChannelId);
     if (!logChannel || !logChannel.isTextBased()) return;
 
     message.delete().catch(() => {});

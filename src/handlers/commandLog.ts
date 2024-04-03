@@ -1,14 +1,14 @@
 import { EmbedBuilder, type Message } from 'discord.js';
-import { readConfig } from '../lib/util/functions';
 import client from '../client';
 import { mainColor } from '../lib/util/constants';
+import Config from '../lib/util/config';
 
 export default async function (message: Message<true>, commandName: string) {
-  const config = await readConfig(message.guildId);
-  if (!config || !config.logging?.commands || !config.logging.commands.enabled || !config.logging.commands.channelId)
+  const config = Config.get(message.guildId);
+  if (!config || !config.data.logging?.commands || !config.data.logging.commands.enabled || !config.data.logging.commands.channelId)
     return;
 
-  const channel = await client.channels.fetch(config.logging.commands.channelId);
+  const channel = await client.channels.fetch(config.data.logging.commands.channelId);
   if (!channel || !channel.isTextBased()) return;
 
   const embed = new EmbedBuilder()

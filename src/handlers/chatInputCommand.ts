@@ -1,13 +1,13 @@
 import { type ChatInputCommandInteraction, EmbedBuilder, Colors } from 'discord.js';
 import client from '../client';
-import { readConfig } from '../lib/util/functions';
+import Config from '../lib/util/config';
 export const unresolvedGuilds = new Set<string>();
 
 export default async function (interaction: ChatInputCommandInteraction) {
   if (!interaction.inGuild() || !interaction.inCachedGuild())
     return interaction.reply({ content: 'This command must be ran in a guild.', ephemeral: true });
 
-  const config = await readConfig(interaction.guildId);
+  const config = Config.get(interaction.guildId);
   const guild = await confirmGuild(interaction.guildId);
 
   if (!config || !guild) return interaction.reply({ content: 'Unknown guild.', ephemeral: true });
@@ -38,7 +38,7 @@ export default async function (interaction: ChatInputCommandInteraction) {
   }
 
   try {
-    await command.run(interaction, null, config);
+    await command.run(interaction, null, config.data);
 
     if (command.guildResolve) unresolvedGuilds.delete(`${interaction.guildId!} ${interaction.commandName}`);
   } catch (e) {

@@ -1,8 +1,7 @@
 import { GuildMember, Message, PermissionFlagsBits, User } from 'discord.js';
 import client from '../client';
-import { PunishmentType as PT, PunishmentType } from '../lib/util/constants';
+import { PunishmentType as PT } from '../lib/util/constants';
 import { adequateHierarchy, genID, getFlag, getMember, getUser } from '../lib/util/functions';
-import { pastTensePunishmentTypes, punishmentColors } from '../lib/util/constants';
 import ms from 'ms';
 import numberToWord from 'number-to-words';
 import { Escalation } from '../types';
@@ -123,7 +122,7 @@ export default async function (message: Message<true>, args: string[], commandNa
       break;
   }
 
-  await client.punishments.createMessage(punish, message.channel);
+  client.punishments.createMessage(punish, message.channel);
 
   client.punishments.createLog(punish);
   commandLog(message, commandName);
