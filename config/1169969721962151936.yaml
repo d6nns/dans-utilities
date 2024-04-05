@@ -26,6 +26,48 @@ lock:
   channels: ['1220275649550487612', '1170309998165905488', '1170309999352872970', '1169979209356169226', '1170310001777184878', '1170314103399657512', '1170310002909642812', '1169978174965305374']
   overrides: 377960303168 # Will deny Send Messages, Send Messages In Threads, Create Public/Private Threads, Attach Files, Add Reactions, Connect (vc), Speak (vc), Video (vc)
 
+tags:
+  - name: '1'
+    aliases: ['respect', 'toxic']
+    embed:
+      color: 0x1e1f22
+      fields: 
+        - name: "💞  Respect everyone at all times."
+          value: "Hate speech, toxicity and/or harassment is strictly prohibited."
+          inline: false
+  - name: '2'
+    aliases: ['mature', 'maturity']
+    embed:
+      color: 0x1e1f22
+      fields: 
+        - name: "Act mature when interacting in our community."
+          value: "Use the community productively and do not engage in debates or arguments. Report it to our team instead."
+          inline: false
+  - name: '3'
+    aliases: ['sfw', 'nsfw']
+    embed:
+      color: 0x1e1f22
+      fields: 
+        - name: "🔞  No inappropriate contributions."
+          value: "This is not the place for NSFW images, messages or profiles. The same goes for overly sexual/suggestive conversations as well as sending unrelated links as we cannot keep our community safe outside of our community."
+          inline: false
+  - name: 'mod'
+    aliases: ['apply', 'staff']
+    embed:
+      color: 0x1e1f22
+      fields: 
+        - name: "How do I apply for staff?"
+          value: "To become a staff member, you must apply through our staff application. This form is available in <#1169978382008721518> when we require more staff, and you'll usually require around Level 10+ and 2 or less warnings to apply (but this may change)."
+          inline: false
+  - name: 'slowmode'
+    aliases: ['slow', 'sm']
+    embed:
+      color: 0x1e1f22
+      fields: 
+        - name: "Why is slowmode so high?"
+          value: "In order to effectively moderate chat, slowmode needs to be high so that moderators can view and punish users that break the rules. You can level up to gain access to chats with no slowmode!"
+          inline: false
+          
 automod:
   filters:
     - name: 'No Swear Filter'
