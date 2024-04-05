@@ -118,7 +118,7 @@ class HelpCommand extends Command {
     embed.addFields({
       name: 'Utility',
       value:
-        '`avatar`, `alt-manager`, `help`, `lock`, `unlock`, `manage-nick`, `moderate-nick`, `ping`, `purge`, `slowmode`, `userinfo`'
+        '`avatar`, `alt-manager`, `help`, `lock`, `unlock`, `manage-nick`, `moderate-nick`, `ping`, `purge`, `slowmode`, `tag`, `userinfo`'
     });
     embed.addFields({
       name: 'Tomfoolery',
