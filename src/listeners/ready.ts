@@ -1,4 +1,4 @@
-import { ActivityType } from 'discord.js';
+import { ActivityType, ApplicationCommandType } from 'discord.js';
 import Listener from '../lib/structs/Listener';
 import { confirmCommands, confirmConfig, confirmCtxCommands, readConfig } from '../lib/util/functions';
 
@@ -8,10 +8,12 @@ class ReadyListener extends Listener {
   }
 
   async run() {
-    const commands = await this.client.application!.commands.fetch();
+    const commands = (await this.client.application!.commands.fetch()).filter(
+      command => command.type === ApplicationCommandType.ChatInput
+    );
 
     for (const cmd of commands.values()) {
-      const command = this.client.commands.slash.get(cmd.name)! ?? this.client.commands.context.get(cmd.name)!;
+      const command = this.client.commands.slash.get(cmd.name)!;
       command.id = cmd.id;
     }
     console.log(`Logged in as ${this.client.user!.username}.`);

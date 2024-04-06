@@ -18,7 +18,7 @@ export default async function (interaction: ChatInputCommandInteraction) {
   if (command.clientPermissions) {
     if (!interaction.guild!.members.me!.permissions.has(command.clientPermissions))
       return interaction.reply({
-        content: `**Configuration error.**\n> The command could not be executed as I don't have the required permissions for it.\n> For me to execute this command you need to give me the following permission(s): \`${command.clientPermissions
+        content: `**Configuration error.**\n> The command could not be executed as I do not have the required permissions for it.\n> For me to execute this command you need to give me the following permission(s): \`${command.clientPermissions
           .toArray()
           .join('`, `')
           .replaceAll(/[a-z][A-Z]/g, m => `${m[0]} ${m[1]}`)}\`.`,

@@ -1,5 +1,5 @@
+import { PunishmentType } from '@prisma/client';
 import { PreconditionType } from '../lib/util/constants';
-import { PunishmentType } from '../lib/util/constants';
 
 export type EscalationType = 'Manual' | 'AutoMod';
 
@@ -23,7 +23,7 @@ type MessageCommandProperties = {
   precondition?: PreconditionType;
 };
 
-export type CommandProperties<M extends 'slash' | 'message'> = M extends 'message'
+export type CommandProperties<M extends 'slash' | 'message' | 'context'> = M extends 'message'
   ? MessageCommandProperties
   : {
       clientPermissions?: bigint | bigint[];

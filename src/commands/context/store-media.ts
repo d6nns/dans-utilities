@@ -5,17 +5,20 @@ import {
   PermissionFlagsBits,
   hideLinkEmbed
 } from 'discord.js';
-import CtxMenu, { ctxdata } from '../../lib/structs/Context';
 import { ConfigData } from '../../lib/structs/Interfaces';
+import Command, { data, properties } from '../../lib/structs/Command';
 
-@ctxdata(
+@data<'context'>(
   new ContextMenuCommandBuilder()
-    .setName('store-media')
+    .setName('Store Media')
     .setType(ApplicationCommandType.Message)
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 )
-class StoreMediACtxMenu extends CtxMenu {
-  async run(interaction: MessageContextMenuCommandInteraction<'cached'>, config: ConfigData) {
+@properties<'context'>({
+  clientPermissions: PermissionFlagsBits.EmbedLinks
+})
+class StoreMediACtxMenu extends Command {
+  async run(interaction: MessageContextMenuCommandInteraction<'cached'>, args: null, config: ConfigData) {
     const message = interaction.targetMessage;
     if (message.attachments.size < 1) throw 'This message has no attachments.';
 

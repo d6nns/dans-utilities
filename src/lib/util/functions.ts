@@ -308,10 +308,10 @@ export async function confirmCtxCommands() {
   const rest = new REST({ version: '10' }).setToken(process.env.TOKEN!);
 
   try {
-    console.log(`[Client] Started refreshing ${commands.length} application (/) commands.`);
+    console.log(`[Client] Started refreshing ${commands.length} global application (/) commands.`);
     const data: any = await rest.put(Routes.applicationCommands(client.user!.id), { body: commands });
 
-    console.log(`[Client] Successfully reloaded ${data.length} application (/) commands.`);
+    console.log(`[Client] Successfully reloaded ${data.length} global application (/) commands.`);
   } catch (error) {
     console.error(error);
   }

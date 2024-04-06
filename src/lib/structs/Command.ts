@@ -1,4 +1,12 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, PermissionsBitField, Message, If } from 'discord.js';
+import {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+  PermissionsBitField,
+  Message,
+  If,
+  ContextMenuCommandBuilder,
+  ContextMenuCommandInteraction
+} from 'discord.js';
 import client from '../../client';
 import { CommandProperties } from '../../types';
 import { isMessageCommandProperties } from '../../types/typeguard';
@@ -26,13 +34,15 @@ export default abstract class Command<IsMsg extends boolean = false> {
   public client = client;
 
   abstract run(
-    interaction: ChatInputCommandInteraction | Message,
+    interaction: ChatInputCommandInteraction | Message | ContextMenuCommandInteraction,
     args?: string[] | null,
     config?: ConfigData
   ): unknown;
 }
 
-export function data(data: Partial<SlashCommandBuilder>) {
+export function data<M extends 'slash' | 'context' = 'slash'>(
+  data: M extends 'slash' ? Partial<SlashCommandBuilder> : Partial<ContextMenuCommandBuilder>
+) {
   return function <T extends { new (...args: any[]): {} }>(constructor: T) {
     return class extends constructor {
       data = data;
@@ -40,7 +50,7 @@ export function data(data: Partial<SlashCommandBuilder>) {
   };
 }
 
-export function properties<M extends 'message' | 'slash'>(properties: CommandProperties<M>) {
+export function properties<M extends 'message' | 'slash' | 'context'>(properties: CommandProperties<M>) {
   return function <T extends { new (...args: any[]): {} }>(constructor: T) {
     return class extends constructor {
       clientPermissions = properties.clientPermissions ? new PermissionsBitField(properties.clientPermissions) : null;
