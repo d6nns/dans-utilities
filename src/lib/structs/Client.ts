@@ -11,7 +11,7 @@ import PunishmentManager from './PunishmentManager';
 class Client extends DJSClient {
   public db = new PrismaClient();
   public commands = {
-    slash: new Map<string, Command>(),
+    slash: new Map<string, Command<false>>(),
     message: new Map<string, Command<true>>(),
     context: new Map<string, Command<false>>()
   };

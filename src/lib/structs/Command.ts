@@ -14,7 +14,8 @@ import { ConfigData } from './Interfaces';
 import { PreconditionType } from '../util/constants';
 
 export default abstract class Command<IsMsg extends boolean = false> {
-  public readonly data: IsMsg extends false ? Partial<SlashCommandBuilder> : null = null!;
+  public readonly data: IsMsg extends false ? Partial<SlashCommandBuilder> | Partial<ContextMenuCommandBuilder> : null =
+    null!;
   public clientPermissions: PermissionsBitField | null = null;
   public userPermissions: PermissionsBitField | null = null;
   public precondition: PreconditionType | null = null;
