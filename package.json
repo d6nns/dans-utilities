@@ -29,7 +29,8 @@
     "prisma-redis-middleware": "^4.8.0"
   },
   "overrides": {
-    "discord-api-types": "0.37.20"
+    "discord-api-types": "0.37.20",
+    "@discordjs/builders": "1.7.0"
   },
   "devDependencies": {
     "typescript": "^5.1.6"
